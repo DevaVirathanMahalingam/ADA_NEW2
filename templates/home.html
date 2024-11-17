@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADA Transport Company</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+
+
+</head>
+<body>
+    <header>
+        <h1>ADA Transport Company</h1>
+    </header>
+    <main>
+        <p>Welcome to the ADA Transport Management System!</p>
+        <div class="column">
+            <div>
+                <a href="{{ url_for('data_entry') }}" class="link-button">Data Entry</a>
+                <a href="{{ url_for('filter_by_driver') }}" class="link-button">Filter by Driver</a>
+                <a href="{{ url_for('client') }}" class="link-button">Filter by Client</a>
+            </div>
+            <div>
+                <form action="{{ url_for('clear_data') }}" method="POST" onsubmit="return confirmClear('Are you sure you want to clear all data? This action cannot be undone!');">
+                    <button type="submit" class="btn btn-danger">Clear All Data</button>
+                </form>
+            </div>
+        </div>
+        
+    </main>
+    <script>
+        function confirmClear(message) {
+        return confirm(message);
+    }
+    </script>
+</body>
+</html>

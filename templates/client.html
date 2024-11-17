@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Client</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    
+</head>
+<body>
+    <header>
+        <h1>Search Client</h1>
+    </header>
+    <main>
+        <form method="POST">
+            <label for="client_name">Client Name:</label>
+            <input type="text" id="client_name" name="client_name" placeholder="Enter client name" value="{{ client_name if client_name else '' }}" required>
+            <button type="submit">Search</button>
+        </form>
+
+        {% if client_details %}
+            <h2>Client Details</h2>
+            <p><strong>Client ID:</strong> {{ client_details.id }}</p>
+            <p><strong>Client Name:</strong> {{ client_details.name }}</p>
+
+            {% if records %}
+                <h3>Client Records</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Material Name</th>
+                            <th>Vehicle Number</th>
+                            <th>Driver Name</th>
+                            <th>Material Cost</th>
+                            <th>Transport Cost</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Paid Amount</th>
+                            <th>Total Amount</th>
+                            <th>Remaining Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in records %}
+                            <tr>
+                                <td>{{ record[0] }}</td>
+                                <td>{{ record[1] }}</td>
+                                <td>{{ record[2] }}</td>
+                                <td>{{ record[3] }}</td>
+                                <td>{{ record[4] }}</td>
+                                <td>{{ record[5] }}</td>
+                                <td>{{ record[6] }}</td>
+                                <td>{{ record[7] }}</td>
+                                <td>{{ record[8] }}</td>
+                                <td>{{ record[9] }}</td>
+                                <td>{{ record[10] }}</td>
+                                
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <h3>Totals</h3>
+                <p><strong>Material Cost Total:</strong> {{ totals[0] }}</p>
+                <p><strong>Transport Cost Total:</strong> {{ totals[1] }}</p>
+                <p><strong>Total Amount:</strong> {{ totals[2] }}</p>
+                <p><strong>Remaining Amount:</strong> {{ totals[3] }}</p>
+            {% else %}
+                <p>No records found for this client.</p>
+            {% endif %}
+        {% else %}
+            <p>Client not found. Please try another search.</p>
+        {% endif %}
+        <center>
+            <a href="{{ url_for('home') }}" class="link-button">Home</a>
+        </center>
+    </main>
+    
+</body>
+</html>
